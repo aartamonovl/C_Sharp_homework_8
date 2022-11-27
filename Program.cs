@@ -8,6 +8,54 @@
 // 9 5 3 2
 // 8 4 4 2
 
+// int[,] Create2dArray(int rows, int columns)
+// {
+//     int[,] createdArray = new int[rows, columns];
+
+//     for (int i = 0; i < rows; i++)
+//         for (int j = 0; j < columns; j++)
+//             createdArray[i, j] = new Random().Next(0, 10);
+//     return createdArray;
+// }
+
+// void Show2dArray (int[,] array)
+// {
+//     for(int i = 0; i < array.GetLength(0); i++)
+//     {
+//         for(int j = 0; j < array.GetLength(1); j++)
+//             Console.Write(array[i, j] + " ");
+//         Console.WriteLine();
+//     }
+//     Console.WriteLine();
+// }
+
+// int [,] SortElemRows (int [,] array)
+// {
+//     for (int i = 0; i < array.GetLength(0); i++)
+//         for (int j = 0; j < array.GetLength(1); j++)
+//             for (int k = j + 1; k < array.GetLength(1); k++)
+//                 if (array[i, k] > array[i, j])
+//                 {
+//                     int temp = array[i,j];
+//                     array[i, j] = array[i, k];
+//                     array[i, k] = temp;
+//                 }
+//     return array;
+// }
+
+// int [,] randArray = Create2dArray(3, 4);
+// Show2dArray(randArray);
+// Show2dArray(SortElemRows(randArray));
+
+
+// Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
+// Например, задан массив:
+// 1 4 7 2
+// 5 9 2 3
+// 8 4 2 4
+// 5 2 6 7
+// Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
+
 int[,] Create2dArray(int rows, int columns)
 {
     int[,] createdArray = new int[rows, columns];
@@ -15,7 +63,6 @@ int[,] Create2dArray(int rows, int columns)
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < columns; j++)
             createdArray[i, j] = new Random().Next(0, 10);
-
     return createdArray;
 }
 
@@ -30,34 +77,41 @@ void Show2dArray (int[,] array)
     Console.WriteLine();
 }
 
-int [,] SortElemRows (int [,] array)
+void Show1dArray (int[] array)
 {
-    for (int i = 0; i < array.GetLength(0); i++)
-        for (int j = 0; j < array.GetLength(1); j++)
-            for (int k = j + 1; k < array.GetLength(1); k++)
-                if (array[i, k] > array[i, j])
-                {
-                    int temp = array[i,j];
-                    array[i, j] = array[i, k];
-                    array[i, k] = temp;
-                }
-    return array;
+        for(int i = 0; i < array.Length; i++)
+            Console.WriteLine(array[i] + " ");
+        Console.WriteLine();
 }
 
-int [,] randArray = Create2dArray(3, 4);
-Show2dArray(randArray);
-Show2dArray(SortElemRows(randArray));
+int [] FindSumElemRow(int [,] array)
+{
+    int [] sumRowArray = new int[array.GetLength(0)];
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        int sum = 0;
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            sum += array[i,j];
+        }
+        sumRowArray[i] = sum;
+    }
+    return sumRowArray;
+}
 
+int FindMinSumIndex (int [] array)
+{
+    int iMin = 0;
+    for (int i = 1; i < array.Length; i++)
+        if (array[i] < array[iMin]) iMin = i;
+    return iMin;    
+}
 
-// Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
-// Например, задан массив:
-// 1 4 7 2
-// 5 9 2 3
-// 8 4 2 4
-// 5 2 6 7
-// Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
-
-
+int [,] rand2dArray = Create2dArray(3, 4);
+Show2dArray (rand2dArray);
+int [] sumElemRows = FindSumElemRow(rand2dArray);
+Show1dArray(sumElemRows);
+Console.WriteLine($"Sum of elem in rows is min in row {FindMinSumIndex(sumElemRows)}");
 
 
 // Задача 58:(дополнительно) Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
