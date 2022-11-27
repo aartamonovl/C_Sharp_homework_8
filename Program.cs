@@ -173,32 +173,32 @@
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
-int[,,] Create3dArray(int rows, int columns, int depth)
-{
-    int[,,] createdArray = new int[rows, columns, depth];
+// int[,,] Create3dArray(int rows, int columns, int depth)
+// {
+//     int[,,] createdArray = new int[rows, columns, depth];
 
-    for (int i = 0; i < rows; i++)
-        for (int j = 0; j < columns; j++)
-            for (int k = 0; k < depth; k++)
-                createdArray[i, j, k] = new Random().Next(10, 100);
-    return createdArray;
-}
+//     for (int i = 0; i < rows; i++)
+//         for (int j = 0; j < columns; j++)
+//             for (int k = 0; k < depth; k++)
+//                 createdArray[i, j, k] = new Random().Next(10, 100);
+//     return createdArray;
+// }
 
-void Show3dArray (int[,,] array)
-{
-    for(int i = 0; i < array.GetLength(0); i++)
-    {
-        for(int j = 0; j < array.GetLength(1); j++)
-        {
-            for (int k = 0; k < array.GetLength(2); k++)
-                Console.Write($"{array[i, j, k]}({j},{k},{i}) ");
-            Console.WriteLine();
-        }    
-    }
-    Console.WriteLine();
-}
+// void Show3dArray (int[,,] array)
+// {
+//     for(int i = 0; i < array.GetLength(0); i++)
+//     {
+//         for(int j = 0; j < array.GetLength(1); j++)
+//         {
+//             for (int k = 0; k < array.GetLength(2); k++)
+//                 Console.Write($"{array[i, j, k]}({j},{k},{i}) ");
+//             Console.WriteLine();
+//         }    
+//     }
+//     Console.WriteLine();
+// }
 
-Show3dArray(Create3dArray(2,2,2));
+// Show3dArray(Create3dArray(2,2,2));
 
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
 // Например, на выходе получается вот такой массив:
@@ -206,3 +206,63 @@ Show3dArray(Create3dArray(2,2,2));
 // 12 13 14 05
 // 11 16 15 06
 // 10 09 08 07
+
+int[,] Create2dArray(int rows, int columns)
+{
+    int[,] array = new int[rows, columns];
+    int num = 1;
+    for (int j = 0; j < columns; j++)
+        array[0, j] = num++;
+    for (int i = 1; i < rows; i++)
+        array[i, rows - 1] = num++;
+    for (int j = columns - 2; j >= 0; j--)
+        array[rows - 1, j] = num++;
+    for (int i = rows - 2; i >= 1; i--)
+        array[i, 0] = num++;
+
+    int row = 1;
+    int col = 1;
+    while (num < array.Length)
+    {
+        while (array[row, col + 1] == 0)
+        {
+            array[row, col] = num++;
+            col++;
+        }
+        while (array[row + 1, col] == 0)
+        {
+            array[row, col] = num++;
+            row++;
+        }
+        while (array[row, col - 1] == 0)
+        {
+            array[row, col] = num++;
+            col--;
+        }
+        while (array[row - 1, col] == 0)
+        {
+            array[row, col] = num++;
+            row--;
+        }
+    }
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < columns; j++)
+            if (array[i, j] == 0) array[i, j] = num;
+    return array;
+}
+
+void Show2dArray (int[,] array)
+{
+    for(int i = 0; i < array.GetLength(0); i++)
+    {
+        for(int j = 0; j < array.GetLength(1); j++)
+        if (array[i, j] < 10)
+            Console.Write($"0{array[i, j]} ");
+        else
+            Console.Write(array[i, j] + " ");
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+}
+
+Show2dArray(Create2dArray(4,4));
