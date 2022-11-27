@@ -56,6 +56,72 @@
 // 5 2 6 7
 // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 
+// int[,] Create2dArray(int rows, int columns)
+// {
+//     int[,] createdArray = new int[rows, columns];
+
+//     for (int i = 0; i < rows; i++)
+//         for (int j = 0; j < columns; j++)
+//             createdArray[i, j] = new Random().Next(0, 10);
+//     return createdArray;
+// }
+
+// void Show2dArray (int[,] array)
+// {
+//     for(int i = 0; i < array.GetLength(0); i++)
+//     {
+//         for(int j = 0; j < array.GetLength(1); j++)
+//             Console.Write(array[i, j] + " ");
+//         Console.WriteLine();
+//     }
+//     Console.WriteLine();
+// }
+
+// void Show1dArray (int[] array)
+// {
+//         for(int i = 0; i < array.Length; i++)
+//             Console.WriteLine(array[i] + " ");
+//         Console.WriteLine();
+// }
+
+// int [] FindSumElemRow(int [,] array)
+// {
+//     int [] sumRowArray = new int[array.GetLength(0)];
+//     for (int i = 0; i < array.GetLength(0); i++)
+//     {
+//         int sum = 0;
+//         for (int j = 0; j < array.GetLength(1); j++)
+//         {
+//             sum += array[i,j];
+//         }
+//         sumRowArray[i] = sum;
+//     }
+//     return sumRowArray;
+// }
+
+// int FindMinSumIndex (int [] array)
+// {
+//     int iMin = 0;
+//     for (int i = 1; i < array.Length; i++)
+//         if (array[i] < array[iMin]) iMin = i;
+//     return iMin;    
+// }
+
+// int [,] rand2dArray = Create2dArray(3, 4);
+// Show2dArray (rand2dArray);
+// int [] sumElemRows = FindSumElemRow(rand2dArray);
+// Show1dArray(sumElemRows);
+// Console.WriteLine($"Sum of elem in rows is min in row {FindMinSumIndex(sumElemRows)}");
+
+
+// Задача 58:(дополнительно) Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+// Например, даны 2 матрицы:
+// 2 4 | 3 4
+// 3 2 | 3 3
+// Результирующая матрица будет:
+// 18 20
+// 15 18
+
 int[,] Create2dArray(int rows, int columns)
 {
     int[,] createdArray = new int[rows, columns];
@@ -77,52 +143,27 @@ void Show2dArray (int[,] array)
     Console.WriteLine();
 }
 
-void Show1dArray (int[] array)
+int [,] MultTwoArray (int [,] firstArray, int [,] secondArray)
 {
-        for(int i = 0; i < array.Length; i++)
-            Console.WriteLine(array[i] + " ");
-        Console.WriteLine();
-}
-
-int [] FindSumElemRow(int [,] array)
-{
-    int [] sumRowArray = new int[array.GetLength(0)];
-    for (int i = 0; i < array.GetLength(0); i++)
+    int [,] multArray = new int [firstArray.GetLength(0), secondArray.GetLength(1)];
+    for (int i = 0; i < firstArray.GetLength(0); i++)
     {
-        int sum = 0;
-        for (int j = 0; j < array.GetLength(1); j++)
+        for (int j = 0; j < secondArray.GetLength(1); j++)
         {
-            sum += array[i,j];
+            for (int k = 0; k < secondArray.GetLength(0); k++)
+            {
+                multArray[i,j] += firstArray[i, k] * secondArray[k, j];
+            }
         }
-        sumRowArray[i] = sum;
     }
-    return sumRowArray;
+    return multArray;
 }
 
-int FindMinSumIndex (int [] array)
-{
-    int iMin = 0;
-    for (int i = 1; i < array.Length; i++)
-        if (array[i] < array[iMin]) iMin = i;
-    return iMin;    
-}
-
-int [,] rand2dArray = Create2dArray(3, 4);
-Show2dArray (rand2dArray);
-int [] sumElemRows = FindSumElemRow(rand2dArray);
-Show1dArray(sumElemRows);
-Console.WriteLine($"Sum of elem in rows is min in row {FindMinSumIndex(sumElemRows)}");
-
-
-// Задача 58:(дополнительно) Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
-// Например, даны 2 матрицы:
-// 2 4 | 3 4
-// 3 2 | 3 3
-// Результирующая матрица будет:
-// 18 20
-// 15 18
-
-
+int [,] first2dArray = Create2dArray(2, 2);
+int [,] second2dArray = Create2dArray(2, 2);
+Show2dArray(first2dArray);
+Show2dArray(second2dArray);
+Show2dArray(MultTwoArray(first2dArray, second2dArray));
 
 
 // Задача 60.(дополнительно) ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
