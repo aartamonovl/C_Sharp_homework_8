@@ -122,48 +122,48 @@
 // 18 20
 // 15 18
 
-int[,] Create2dArray(int rows, int columns)
-{
-    int[,] createdArray = new int[rows, columns];
+// int[,] Create2dArray(int rows, int columns)
+// {
+//     int[,] createdArray = new int[rows, columns];
 
-    for (int i = 0; i < rows; i++)
-        for (int j = 0; j < columns; j++)
-            createdArray[i, j] = new Random().Next(0, 10);
-    return createdArray;
-}
+//     for (int i = 0; i < rows; i++)
+//         for (int j = 0; j < columns; j++)
+//             createdArray[i, j] = new Random().Next(0, 10);
+//     return createdArray;
+// }
 
-void Show2dArray (int[,] array)
-{
-    for(int i = 0; i < array.GetLength(0); i++)
-    {
-        for(int j = 0; j < array.GetLength(1); j++)
-            Console.Write(array[i, j] + " ");
-        Console.WriteLine();
-    }
-    Console.WriteLine();
-}
+// void Show2dArray (int[,] array)
+// {
+//     for(int i = 0; i < array.GetLength(0); i++)
+//     {
+//         for(int j = 0; j < array.GetLength(1); j++)
+//             Console.Write(array[i, j] + " ");
+//         Console.WriteLine();
+//     }
+//     Console.WriteLine();
+// }
 
-int [,] MultTwoArray (int [,] firstArray, int [,] secondArray)
-{
-    int [,] multArray = new int [firstArray.GetLength(0), secondArray.GetLength(1)];
-    for (int i = 0; i < firstArray.GetLength(0); i++)
-    {
-        for (int j = 0; j < secondArray.GetLength(1); j++)
-        {
-            for (int k = 0; k < secondArray.GetLength(0); k++)
-            {
-                multArray[i,j] += firstArray[i, k] * secondArray[k, j];
-            }
-        }
-    }
-    return multArray;
-}
+// int [,] MultTwoArray (int [,] firstArray, int [,] secondArray)
+// {
+//     int [,] multArray = new int [firstArray.GetLength(0), secondArray.GetLength(1)];
+//     for (int i = 0; i < firstArray.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < secondArray.GetLength(1); j++)
+//         {
+//             for (int k = 0; k < secondArray.GetLength(0); k++)
+//             {
+//                 multArray[i,j] += firstArray[i, k] * secondArray[k, j];
+//             }
+//         }
+//     }
+//     return multArray;
+// }
 
-int [,] first2dArray = Create2dArray(2, 2);
-int [,] second2dArray = Create2dArray(2, 2);
-Show2dArray(first2dArray);
-Show2dArray(second2dArray);
-Show2dArray(MultTwoArray(first2dArray, second2dArray));
+// int [,] first2dArray = Create2dArray(2, 2);
+// int [,] second2dArray = Create2dArray(2, 2);
+// Show2dArray(first2dArray);
+// Show2dArray(second2dArray);
+// Show2dArray(MultTwoArray(first2dArray, second2dArray));
 
 
 // Задача 60.(дополнительно) ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
@@ -173,9 +173,32 @@ Show2dArray(MultTwoArray(first2dArray, second2dArray));
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
+int[,,] Create3dArray(int rows, int columns, int depth)
+{
+    int[,,] createdArray = new int[rows, columns, depth];
 
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < columns; j++)
+            for (int k = 0; k < depth; k++)
+                createdArray[i, j, k] = new Random().Next(10, 100);
+    return createdArray;
+}
 
+void Show3dArray (int[,,] array)
+{
+    for(int i = 0; i < array.GetLength(0); i++)
+    {
+        for(int j = 0; j < array.GetLength(1); j++)
+        {
+            for (int k = 0; k < array.GetLength(2); k++)
+                Console.Write($"{array[i, j, k]}({j},{k},{i}) ");
+            Console.WriteLine();
+        }    
+    }
+    Console.WriteLine();
+}
 
+Show3dArray(Create3dArray(2,2,2));
 
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
 // Например, на выходе получается вот такой массив:
